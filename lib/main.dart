@@ -53,7 +53,6 @@ void main() async{
 }
 
 class DemoFlutter extends StatelessWidget {
-  final Locale _locale = Locale('en');
    DemoFlutter({super.key});
   final MemberRepository _memberRepository = GetIt.I<MemberRepository>();
   @override

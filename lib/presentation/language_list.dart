@@ -28,7 +28,7 @@ class LanguageList extends StatelessWidget {
   }
 }
 class _Divider extends StatelessWidget {
-  const _Divider({super.key});
+  const _Divider();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,6 @@ class _Divider extends StatelessWidget {
 }
 class _SwitchListTileMenuItem extends StatelessWidget {
   const _SwitchListTileMenuItem({
-    super.key,
     required this.title,
     required this.subtitle,
     required this.locale,
