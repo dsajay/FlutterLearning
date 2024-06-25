@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/domain/entities/add_member.dart';
 import 'package:flutter1/domain/use_case.dart';
@@ -10,6 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 import '../domain/repositories/member/member_repository.dart';
+import '../generated/locale_keys.g.dart';
 import 'bloc/member/member_bloc.dart';
 import 'custom/custom_button.dart';
 import 'custom/custom_drop_down.dart';
@@ -59,7 +61,7 @@ class _AddMemberState extends State<AddMember> {
     final MemberBloc memberBloc = MemberBloc(_memberRepository);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Member"),
+        title: const Text(LocaleKeys.dashboard_add_member).tr(),
       ),
       body: BlocListener<MemberBloc,MemberState>(
         bloc: memberBloc,
@@ -106,13 +108,13 @@ class _AddMemberState extends State<AddMember> {
                       height: 20,
                     ),
                     CustomEditText(
-                      labelText: "Enter Code",
-                      hint: "Code",
+                      labelText: LocaleKeys.add_member_enter_code.tr(),
+                      hint: LocaleKeys.add_member_hint_code.tr(),
                       inputType: TextInputType.number,
                       controller: _codeController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter code';
+                          return  LocaleKeys.black_enter_error_with_agr.tr(args: [LocaleKeys.add_member_hint_code.tr()]);
                         }
                         return null;
                       },
@@ -121,13 +123,13 @@ class _AddMemberState extends State<AddMember> {
                       height: 20,
                     ),
                     CustomEditText(
-                      labelText: "Enter Name",
-                      hint: "Name",
+                      labelText: LocaleKeys.add_member_enter_name.tr(),
+                      hint: LocaleKeys.add_member_name.tr(),
                       inputType: TextInputType.name,
                       controller: _nameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter name';
+                          return  LocaleKeys.black_enter_error_with_agr.tr(args: [LocaleKeys.add_member_name.tr()]);
                         }
                         return null;
                       },
@@ -136,13 +138,13 @@ class _AddMemberState extends State<AddMember> {
                       height: 20,
                     ),
                     CustomEditText(
-                      labelText: "Enter Mobile",
-                      hint: "Mobile",
+                      labelText: LocaleKeys.add_member_enter_mobile.tr(),
+                      hint: LocaleKeys.add_member_mobile.tr(),
                       inputType: TextInputType.phone,
                       controller: _mobileController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter mobile';
+                          return  LocaleKeys.black_enter_error_with_agr.tr(args: [LocaleKeys.add_member_mobile.tr()]);
                         }
                         return null;
                       },
@@ -151,13 +153,13 @@ class _AddMemberState extends State<AddMember> {
                       height: 20,
                     ),
                     CustomEditText(
-                      labelText: "Enter Amount",
-                      hint: "Amount",
+                      labelText: LocaleKeys.add_member_enter_amount.tr(),
+                      hint: LocaleKeys.add_member_amount.tr(),
                       inputType: TextInputType.number,
                       controller: _amount,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter amount';
+                          return  LocaleKeys.black_enter_error_with_agr.tr(args: [LocaleKeys.add_member_amount.tr()]);
                         }
                         return null;
                       },
@@ -178,7 +180,7 @@ class _AddMemberState extends State<AddMember> {
                       height: 20,
                     ),
                     InkWell(
-                      child:  CustomButton(text: widget.memberEntity != null ? "Update" : "Save"),
+                      child:  CustomButton(text: widget.memberEntity != null ? LocaleKeys.update.tr() : LocaleKeys.save.tr()),
                       onTap: () {
                         // Validate the form fields
                         if (_formKey.currentState!.validate() &&

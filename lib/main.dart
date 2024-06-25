@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/domain/entities/add_member.dart';
 import 'package:flutter1/domain/use_case.dart';
@@ -8,6 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
+
 import 'data/remote/api/retrofit_client_service.dart';
 import 'data/repositories/remote_data_repositories.dart';
 import 'data/repositories/remote_data_repositories_impl.dart';
@@ -18,6 +20,8 @@ import 'domain/repositories/member/member_repository.dart';
 import 'domain/repositories/member/member_repository_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
   Hive.registerAdapter(MyEntityAdapter()); // Register the adapter
@@ -37,16 +41,28 @@ void main() async{
   GetIt.I.registerLazySingleton<RestClientService>(() => RestClientService(dio));
   GetIt.I.registerLazySingleton<RemoteDataRepositories>(() => RemoteDataRepositoriesImpl());
   GetIt.I.registerLazySingleton<UseCase>(() => UseCase());
-  runApp( DemoFlutter());
+
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
+        path: 'resources/langs', // <-- change the path of the translation files
+        fallbackLocale: Locale('en', 'US'),
+        child: DemoFlutter()
+    ),
+  );
 }
 
 class DemoFlutter extends StatelessWidget {
+  final Locale _locale = Locale('en');
    DemoFlutter({super.key});
   final MemberRepository _memberRepository = GetIt.I<MemberRepository>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.light),
         useMaterial3: true,

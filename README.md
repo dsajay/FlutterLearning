@@ -14,3 +14,14 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+[easy_localization] (https://pub.dev/packages/easy_localization)
+
+## for local
+    flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart
+    flutter pub run easy_localization:generate
+## set language
+      await context.setLocale(context.supportedLocales[0]);
+## use language
+    Text(LocaleKeys.title).tr()
+

@@ -1,11 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter1/generated/locale_keys.g.dart';
 import 'package:flutter1/presentation/add_member.dart';
 import 'package:flutter1/presentation/bloc/member/member_bloc.dart';
 import 'package:flutter1/presentation/bloc/member/member_event.dart';
 import 'package:flutter1/presentation/bloc/member/member_state.dart';
+import 'package:flutter1/presentation/language_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+
 
 import '../domain/repositories/hive_repository.dart';
 import '../utils/date_format.dart';
@@ -61,8 +66,13 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title:
-            const Align(alignment: Alignment.centerLeft, child: Text("Anil")),
+        title:  Align(alignment: Alignment.centerLeft, child: const Text(LocaleKeys.title,style: TextStyle(color: Colors.white),).tr()),
+        actions:  [Padding(padding:const EdgeInsets.symmetric(horizontal: 10),child: IconButton(icon:const Icon(Icons.language_outlined),onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LanguageList()),
+          );
+        },color: Colors.white,))],
       ),
       body: BlocConsumer<MemberBloc, MemberState>(
         listener: (context, state) {
@@ -74,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
         builder: (BuildContext context, MemberState state) {
           if (state is LoadingState) {
             memberBloc.add(GetMemberEvent());
-            return const Center(child: Text("Loading..."));
+            return  Center(child: const Text(LocaleKeys.loading).tr());
           } else if (state is GetMemberState) {
             return state.listMember.isEmpty
                 ? Center(
@@ -82,9 +92,9 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'No Member found',
+                    LocaleKeys.dashboard_no_record_found,
                     style: TextStyle(fontSize: 24),
-                  ),
+                  ).tr(),
                   const SizedBox(
                     height: 20,
                   ),
@@ -105,9 +115,9 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                       child: const Text(
-                        'Add Member',
+                        LocaleKeys.dashboard_add_member,
                         style: TextStyle(fontSize: 24),
-                      ),
+                      ).tr(),
                     ),
                   ),
                 ],
@@ -123,9 +133,9 @@ class _DashboardState extends State<Dashboard> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('Confirmation'),
+                            title: const Text(LocaleKeys.confirmations).tr(),
                             content: const Text(
-                                'Are you sure you want Edit/Delete?'),
+                                LocaleKeys.confirmations_message).tr(),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
@@ -134,7 +144,7 @@ class _DashboardState extends State<Dashboard> {
                                  memberBloc.add(GetMemberEvent());
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Delete'),
+                                child: const Text(LocaleKeys.delete).tr(),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -147,14 +157,14 @@ class _DashboardState extends State<Dashboard> {
                                   ).then((value) => memberBloc.add(GetMemberEvent()));
                                   // Close the dialog when the "OK" button is pressed
                                 },
-                                child: const Text('Edit'),
+                                child: const Text(LocaleKeys.edit).tr(),
                               ),
                               TextButton(
                                 onPressed: () {
                                   // Close the dialog when the "OK" button is pressed
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Cancel'),
+                                child: const Text(LocaleKeys.Cancel).tr(),
                               ),
                             ],
                           );
@@ -184,7 +194,7 @@ class _DashboardState extends State<Dashboard> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child:
-                                    Text(state.listMember[index].amount ?? 'S'),
+                                    Text("${LocaleKeys.rs.tr()} ${state.listMember[index].amount}"),
                                   ),
                                   Align(
                                     alignment: Alignment.centerRight,
@@ -214,7 +224,7 @@ class _DashboardState extends State<Dashboard> {
               MaterialPageRoute(builder: (context) => const AddMember()),
             ).then((value) => memberBloc.add(GetMemberEvent()));
           },
-          tooltip: 'Add Member',
+          tooltip: LocaleKeys.dashboard_add_member.tr(),
           child: const Icon(Icons.add),
         ),
       ),

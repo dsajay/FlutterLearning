@@ -1,0 +1,63 @@
+{
+  "language": "Language",
+  "rs": "Rs",
+  "title": "Hello",
+  "msg": "Hello {} in the {} world ",
+  "msg_named": "{} are written in the {lang} language",
+  "clickMe": "Click me",
+  "appName": "Abcd",
+  "dashboard": {
+    "title": "Reset Password",
+    "no_record_found": "No record found",
+    "add_member": "Add Member"
+  },
+  "add_member": {
+    "enter_code": "Enter Code",
+    "hint_code": "Code",
+    "enter_name": "Enter Name",
+    "name": "Name",
+    "enter_mobile": "Enter Mobile",
+    "mobile": "Mobile",
+    "enter_amount": "Enter Amount",
+    "amount": "Amount",
+    "select_item": "Select Item"
+  },
+  "confirmations": "Confirmation",
+  "delete": "Delete",
+  "edit": "Edit",
+  "confirmations_message": "Are you sure you want Edit/Delete?",
+  "Cancel": "Cancel",
+  "loading": "Loading...",
+  "male": "Male",
+  "female": "Female",
+  "save": "Save",
+  "update": "Update",
+  "black_enter_error_with_agr": "Please enter {}",
+  "black_select_error_with_agr": "Please select {}",
+
+  "clicked": {
+    "zero": "You clicked {} times!",
+    "one": "You clicked {} time!",
+    "two": "You clicked {} times!",
+    "few": "You clicked {} times!",
+    "many": "You clicked {} times!",
+    "other": "You clicked {} times!"
+  },
+  "amount": {
+    "zero": "Your amount : {} ",
+    "one": "Your amount : {} ",
+    "two": "Your amount : {} ",
+    "few": "Your amount : {} ",
+    "many": "Your amount : {} ",
+    "other": "Your amount : {} "
+  },
+  "gender": {
+    "male": "Hi man ;) ",
+    "female": "Hello girl :)",
+    "with_arg": {
+      "male": "Hi man ;) {}",
+      "female": "Hello girl :) {}"
+    }
+  },
+  "reset_locale": "Reset Language"
+}

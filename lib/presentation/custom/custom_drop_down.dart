@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter1/generated/locale_keys.g.dart';
 
 class CustomDropDown extends StatelessWidget {
   final String? selectedItem;
@@ -30,7 +32,7 @@ class CustomDropDown extends StatelessWidget {
             underline: Container( // Remove underline
               height: 0,
             ),
-            hint: const Text('Select an item'),
+            hint: const Text(LocaleKeys.add_member_select_item).tr(),
             onChanged:onChanged,
             items: items.map<DropdownMenuItem<String>>((String item) {
               return DropdownMenuItem<String>(
