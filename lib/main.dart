@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/domain/entities/add_member.dart';
 import 'package:flutter1/domain/use_case.dart';
+import 'package:flutter1/firebase_options.dart';
 import 'package:flutter1/presentation/bloc/member/member_bloc.dart';
 
 import 'package:flutter1/presentation/dashboard.dart';
@@ -21,7 +24,10 @@ import 'domain/repositories/member/member_repository_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+
 
   await Hive.initFlutter();
   Hive.registerAdapter(MyEntityAdapter()); // Register the adapter
@@ -36,6 +42,7 @@ void main() async{
   GetIt.I.registerLazySingleton<MemberRepository>(() => memberRepository);
   var logger = Logger();
   logger.d("Logger is working!");
+  logger.d("Token $fcmToken");
 
   final dio=Dio();
   GetIt.I.registerLazySingleton<RestClientService>(() => RestClientService(dio));
