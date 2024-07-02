@@ -16,6 +16,8 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 [easy_localization] (https://pub.dev/packages/easy_localization)
+    
+    flutter pub run build_runner build
 
 ## for local
     flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart

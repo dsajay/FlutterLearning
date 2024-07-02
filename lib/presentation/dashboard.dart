@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter1/fcm/local_notification.dart';
 import 'package:flutter1/generated/locale_keys.g.dart';
 import 'package:flutter1/presentation/add_member.dart';
 import 'package:flutter1/presentation/bloc/member/member_bloc.dart';
@@ -68,6 +69,8 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title:  Align(alignment: Alignment.centerLeft, child: const Text(LocaleKeys.title,style: TextStyle(color: Colors.white),).tr()),
         actions:  [Padding(padding:const EdgeInsets.symmetric(horizontal: 10),child: IconButton(icon:const Icon(Icons.language_outlined),onPressed: (){
+         LocalNotification.showNotification(title: "title", body: "body", payload: "payload");
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const LanguageList()),
