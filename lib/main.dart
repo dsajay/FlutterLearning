@@ -11,6 +11,7 @@ import 'package:flutter1/firebase_options.dart';
 import 'package:flutter1/presentation/bloc/member/member_bloc.dart';
 
 import 'package:flutter1/presentation/dashboard.dart';
+import 'package:flutter1/tabs/tab_screen.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:logger/logger.dart';
@@ -69,7 +70,7 @@ void main() async{
         supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
         path: 'resources/langs', // <-- change the path of the translation files
         fallbackLocale: Locale('en', 'US'),
-        child: DemoFlutter()
+        child: TabScreen()
     ),
   );
 }
@@ -99,48 +100,4 @@ class DemoFlutter extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
