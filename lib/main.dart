@@ -16,6 +16,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'data/remote/api/retrofit_client_service.dart';
 import 'data/repositories/remote_data_repositories.dart';
@@ -26,6 +27,14 @@ import 'domain/repositories/hive_repository_impl.dart';
 import 'domain/repositories/member/member_repository.dart';
 import 'domain/repositories/member/member_repository_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    // Perform your periodic task here
+    LocalNotification.showNotification(title: "title", body: "body", payload: "payload");
+    print("Background Task: $task");
+    return Future.value(true); // Indicate success
+  });
+}
 void main() async{
   var logger = Logger();
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +73,7 @@ void main() async{
   GetIt.I.registerLazySingleton<RestClientService>(() => RestClientService(dio));
   GetIt.I.registerLazySingleton<RemoteDataRepositories>(() => RemoteDataRepositoriesImpl());
   GetIt.I.registerLazySingleton<UseCase>(() => UseCase());
-
+  Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
   runApp(
     EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
